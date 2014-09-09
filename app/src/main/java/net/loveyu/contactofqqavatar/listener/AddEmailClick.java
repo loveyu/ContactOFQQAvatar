@@ -17,14 +17,14 @@ public class AddEmailClick implements OnClickListener {
 	private View view;
 	private Contact contact;
 	private Dialog dialog;
-	private int postion;
+	private int position;
 
-	public AddEmailClick(Context context, View view, Contact c, Dialog dialog, int postion) {
+	public AddEmailClick(Context context, View view, Contact c, Dialog dialog, int position) {
 		this.context = context;
 		this.view = view;
 		contact = c;
 		this.dialog = dialog;
-		this.postion = postion;
+		this.position = position;
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class AddEmailClick implements OnClickListener {
 			Toast.makeText(context, context.getResources().getString(R.string.add_qq_mail_ok), Toast.LENGTH_SHORT)
 					.show();
 			contact.setEmail("qq", qq + "@qq.com");
-			Contact.selfList.set(postion, contact);
+			Contact.selfList.set(position, contact);
 			dialog.dismiss();
 			MainActivity.NotifyUpdate();
 			if (!ContactAction.hasPhoto(contact.getId(), context.getContentResolver())) {

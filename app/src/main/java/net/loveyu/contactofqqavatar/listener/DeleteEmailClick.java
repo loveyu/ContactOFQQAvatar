@@ -13,12 +13,12 @@ public class DeleteEmailClick implements OnClickListener {
 	String email;
 	Contact contact;
 	Dialog dialog = null;
-	int postion;
+	int position;
 
-	public DeleteEmailClick(String email, Contact contact, int postion, Dialog dialog) {
+	public DeleteEmailClick(String email, Contact contact, int position, Dialog dialog) {
 		this.email = email;
 		this.contact = contact;
-		this.postion = postion;
+		this.position = position;
 		this.dialog = dialog;
 	}
 
@@ -26,7 +26,7 @@ public class DeleteEmailClick implements OnClickListener {
 	public void onClick(View v) {
 		if (ContactAction.DeleteEmail(v.getContext().getContentResolver(), contact.getId(), email)) {
 			contact.getEmail().remove(email);
-			Contact.selfList.set(postion, contact);
+			Contact.selfList.set(position, contact);
 			Toast.makeText(v.getContext(), v.getResources().getString(R.string.delete_this_email_succ),
 					Toast.LENGTH_SHORT).show();
 			MainActivity.NotifyUpdate();

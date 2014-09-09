@@ -14,12 +14,12 @@ public class EditEmailClick implements OnClickListener {
 	String email;
 	Contact contact;
 	Dialog dialog = null;
-	int postion;
+	int position;
 
-	public EditEmailClick(String email, Contact contact, int postion, Dialog dialog) {
+	public EditEmailClick(String email, Contact contact, int position, Dialog dialog) {
 		this.email = email;
 		this.contact = contact;
-		this.postion = postion;
+		this.position = position;
 		this.dialog = dialog;
 	}
 
@@ -36,7 +36,7 @@ public class EditEmailClick implements OnClickListener {
 				String type = contact.getEmail().get(email);
 				contact.getEmail().remove(email);
 				contact.setEmail(type, newQQ + "@qq.com");
-				Contact.selfList.set(postion, contact);
+				Contact.selfList.set(position, contact);
 				MainActivity.NotifyUpdate();
 				Toast.makeText(dialog.getContext(),
 						dialog.getContext().getResources().getString(R.string.edit_email_succ), Toast.LENGTH_SHORT)

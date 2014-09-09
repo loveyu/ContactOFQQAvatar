@@ -7,20 +7,20 @@ import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 
 public class CheckBoxSelectClick implements OnClickListener {
-	private int postion;
+	private int position;
 
 	private static boolean showSelectButton = false;
 
-	public CheckBoxSelectClick(int postion) {
-		this.postion = postion;
+	public CheckBoxSelectClick(int position) {
+		this.position = position;
 	}
 
 	@Override
 	public void onClick(View v) {
-		int i = Contact.selectList.indexOf((Integer) postion);
+		int i = Contact.selectList.indexOf((Integer) position);
 		if (((CheckBox) v).isChecked()) {
 			if (i == -1) {
-				Contact.selectList.add((Integer) postion);
+				Contact.selectList.add((Integer) position);
 			}
 		} else {
 			if (i > -1) {
