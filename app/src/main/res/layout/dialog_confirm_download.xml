@@ -1,0 +1,30 @@
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/GridLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="3"
+    android:orientation="horizontal"
+    android:paddingBottom="15dp"
+    android:paddingTop="15dp"
+    tools:context=".MainActivity" >
+
+    <Button
+        android:id="@+id/ButtonEditQQ"
+        style="?android:attr/buttonStyle"
+        android:layout_gravity="left"
+        android:text="@string/edit_qq_num" />
+
+    <Button
+        android:id="@+id/ButtonRemoveAvatar"
+        style="?android:attr/buttonStyle"
+        android:layout_gravity="left"
+        android:text="@string/remove_avatar" />
+
+    <Button
+        android:id="@+id/ButtonUpdateAvatar"
+        style="?android:attr/buttonStyle"
+        android:layout_gravity="left"
+        android:text="@string/update_avatar" />
+
+</GridLayout>

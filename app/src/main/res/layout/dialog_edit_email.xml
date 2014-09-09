@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="15dp"
+    android:paddingTop="8dp"
+    android:paddingLeft="3dp"
+    android:paddingRight="3dp"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/textView_now_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/textViewCopyright"
+        android:text="@string/empty"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textViewCopyright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView_now_email"
+        android:layout_alignBottom="@+id/textView_now_email"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dp"
+        android:text="@string/now_email"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/editTextInputNewQQ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView_now_email"
+        android:ems="10"
+        android:hint="@string/input_new_qq_number"
+        android:inputType="numberSigned" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/ButtonEditEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/editTextInputNewQQ"
+        android:text="@string/edit" />
+
+    <Button
+        android:id="@+id/ButtonDeleteEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/ButtonEditEmail"
+        android:layout_alignBottom="@+id/ButtonEditEmail"
+        android:layout_alignParentLeft="true"
+        android:text="@string/delete_this_email" />
+
+</RelativeLayout>

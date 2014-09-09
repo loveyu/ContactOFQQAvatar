@@ -1,0 +1,54 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="2dp"
+    android:paddingTop="2dp"
+    tools:context=".MainActivity" >
+
+    <ImageView
+        android:id="@+id/ContactAvatar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:contentDescription="@string/avatar_desc_loading"
+        android:paddingLeft="2dp"
+        android:paddingRight="4dp"
+        android:src="@drawable/avatar" />
+
+    <CheckBox
+        android:id="@+id/checkBoxOfList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ContactEmail"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/ContactPhone"
+        android:focusable="false" />
+
+    <TextView
+        android:id="@+id/ContactName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/ContactAvatar"
+        android:text="@string/empty"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/ContactEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ContactAvatar"
+        android:layout_toRightOf="@+id/ContactAvatar"
+        android:text="@string/empty"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/ContactPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ContactEmail"
+        android:layout_toLeftOf="@+id/checkBoxOfList"
+        android:text="@string/empty"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>

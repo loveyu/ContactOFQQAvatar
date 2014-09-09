@@ -1,0 +1,11 @@
+<resources>
+    <declare-styleable name="ButtonBarContainerTheme">
+        <attr name="buttonBarStyle" format="reference" />
+        <attr name="buttonBarButtonStyle" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="com.baidu.mobads.AdView">
+        <attr name="adSize" format="integer" />
+        <attr name="adId" format="string" />
+    </declare-styleable>
+
+</resources>
