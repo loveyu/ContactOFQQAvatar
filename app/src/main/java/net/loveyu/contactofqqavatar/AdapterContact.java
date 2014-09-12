@@ -1,5 +1,6 @@
 package net.loveyu.contactofqqavatar;
 
+import net.loveyu.contactofqqavatar.listener.AvatarClick;
 import net.loveyu.contactofqqavatar.listener.CheckBoxSelectClick;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -64,6 +65,7 @@ public class AdapterContact extends BaseAdapter {
 		} else {
 			holder.avatar.setImageResource(R.drawable.avatar);
 		}
+        holder.avatar.setOnClickListener(new AvatarClick(context,c.getId()));
 		return convertView;
 	}
 

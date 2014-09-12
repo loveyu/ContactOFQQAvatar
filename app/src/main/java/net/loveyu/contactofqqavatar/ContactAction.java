@@ -77,17 +77,27 @@ public class ContactAction {
 		if (input == null) {
 			return null;
 		}
-		Bitmap photo = BitmapFactory.decodeStream(input);
-		return photo;
+		return BitmapFactory.decodeStream(input);
+	}
+    /**
+     * 获取联系人高清头像
+     * @param people_id 联系人ID
+     * @param cr 调用容器
+     * @return 联系人的高清头像
+     */
+    public static Bitmap getHighPhoto(String people_id, ContentResolver cr) {
+		Uri uri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, Long.parseLong(people_id));
+		InputStream input = ContactsContract.Contacts.openContactPhotoInputStream(cr, uri,true);
+		if (input == null) {
+			return null;
+		}
+		return BitmapFactory.decodeStream(input);
 	}
 
 	public static boolean hasPhoto(String people_id, ContentResolver cr) {
 		Uri uri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, Long.parseLong(people_id));
 		InputStream input = ContactsContract.Contacts.openContactPhotoInputStream(cr, uri);
-		if (input == null) {
-			return false;
-		}
-		return true;
+		return input != null;
 	}
 
 	public static void delContactPhoto(ContentResolver c, String personId) {
