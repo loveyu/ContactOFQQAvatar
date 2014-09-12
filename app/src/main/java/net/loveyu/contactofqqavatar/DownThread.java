@@ -17,6 +17,7 @@ public class DownThread implements Runnable {
 		this.qq = qq;
 		this.notify = notify;
 		this.context = context;
+        MainActivity.DownloadProcess(true);
 	}
 
 	@Override
@@ -45,8 +46,10 @@ public class DownThread implements Runnable {
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
-		}
-	}
+		}finally {
+            MainActivity.DownloadProcess(false);
+        }
+    }
 
 	public byte[] readStream(InputStream inStream) throws Exception {
 		ByteArrayOutputStream outStream = new ByteArrayOutputStream();

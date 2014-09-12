@@ -23,6 +23,15 @@
             android:layout_height="38dp"
             android:layout_gravity="right|top" >
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/download_process"
+                android:layout_toStartOf="@+id/buttonSelectX"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/buttonSelectX" />
+
             <Button
                 android:id="@+id/buttonSelectX"
                 style="?android:attr/buttonStyleSmall"
@@ -40,6 +49,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:text="@string/select_all" />
+
         </RelativeLayout>
 
         <TextView
@@ -50,6 +60,7 @@
             android:layout_gravity="left|center_vertical"
             android:text="@string/app_name"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+
     </GridLayout>
 
     <GridLayout

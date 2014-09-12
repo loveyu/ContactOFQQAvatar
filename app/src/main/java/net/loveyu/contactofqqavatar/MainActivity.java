@@ -35,10 +35,12 @@ public class MainActivity extends Activity {
 	final static int ToastMessage = 3;
 	final static int ShowSelectBox = 4;
 	final static int ShowAdMsg = 5;
+	final static int DownloadProcess = 6;
 	public Handler handler;
 	public static boolean Refresh = false;
 	private Button bsa;
 	private Button bsx;
+	private TextView tvdp;
 	private RelativeLayout rl;
 	private ListView lv;
 	private static boolean ShowAd = true;
@@ -54,6 +56,8 @@ public class MainActivity extends Activity {
 		bsa.setVisibility(Button.GONE);
 		bsx = (Button) findViewById(R.id.buttonSelectX);
 		bsx.setVisibility(Button.GONE);
+        tvdp = (TextView)findViewById(R.id.download_process);
+        tvdp.setVisibility(TextView.GONE);
 		rl = (RelativeLayout) findViewById(R.id.SelectContactAction);
 		rl.setVisibility(RelativeLayout.GONE);
 		if (ShowAd) {
@@ -125,10 +129,43 @@ public class MainActivity extends Activity {
 						}
 					}
 					break;
+                    case DownloadProcess:
+                        String[] value = tvdp.getText().toString().split("/");
+                        int offset = (Integer)msg.obj;
+                        if(value.length != 2) {
+                            if (offset == 1) {
+                                tvdp.setText("0/" + offset);
+                            }
+                        }else{
+                            int v0 = Integer.parseInt(value[0]);
+                            int v1 = Integer.parseInt(value[1]);
+                            if(offset==1){
+                                ++v1;
+                            }else if (offset==-1){
+                                ++v0;
+                            }
+                            if(v0==v1){
+                                Toast.makeText(self,self.getResources().getString(R.string.download_avatar_finish), Toast.LENGTH_SHORT).show();
+                                tvdp.setText("");
+                            }else {
+                                tvdp.setText(v0+"/"+v1);
+                            }
+                        }
+                        break;
 				}
 			}
 		};
 	}
+
+    /**
+     * 通知进度条更新
+     *
+     * @param add 是否添加一个下载，true时为添加下载，false为完成一个下载
+     */
+    public static void DownloadProcess(boolean add) {
+        Message msg = self.handler.obtainMessage(DownloadProcess, add ? 1 : -1);
+        self.handler.sendMessage(msg);
+    }
 
 	public static void NotifyShowAd(int flag) {
 		Message msg = self.handler.obtainMessage(ShowAdMsg, flag);
@@ -158,10 +195,12 @@ public class MainActivity extends Activity {
 			bsa.setVisibility(Button.VISIBLE);
 			bsx.setVisibility(Button.VISIBLE);
 			rl.setVisibility(RelativeLayout.VISIBLE);
+            tvdp.setVisibility(TextView.VISIBLE);
 		} else {
 			bsa.setVisibility(Button.GONE);
 			bsx.setVisibility(Button.GONE);
 			rl.setVisibility(RelativeLayout.GONE);
+            tvdp.setVisibility(TextView.GONE);
 		}
 	}
 
