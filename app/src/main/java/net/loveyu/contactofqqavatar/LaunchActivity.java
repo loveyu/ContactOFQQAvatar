@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 
-public class LanuchActivity extends Activity {
+public class LaunchActivity extends Activity {
     Intent intent;
 
     @Override
@@ -28,7 +28,6 @@ public class LanuchActivity extends Activity {
             }
         }).start();
     }
-
     private void goMain() {
         startActivity(intent);
         finish();

@@ -38,6 +38,7 @@ public class MainActivity extends Activity {
     final static int ShowSelectBox = 4;
     final static int ShowAdMsg = 5;
     final static int DownloadProcess = 6;
+    final static int VersionUpdate = 7;
     public Handler handler;
     public static boolean Refresh = false;
     private Button bsa;
@@ -131,6 +132,9 @@ public class MainActivity extends Activity {
                             }
                         }
                         break;
+                    case VersionUpdate:
+                        Toast.makeText(self, "Need Update", Toast.LENGTH_SHORT).show();
+                        break;
                     case DownloadProcess:
                         String[] value = tvdp.getText().toString().split("/");
                         int offset = (Integer) msg.obj;
@@ -156,6 +160,7 @@ public class MainActivity extends Activity {
                 }
             }
         };
+        new Thread(new Report(getApplicationContext())).start();
     }
 
     /**
@@ -175,6 +180,11 @@ public class MainActivity extends Activity {
 
     public static void NotifyUpdate() {
         Message msg = self.handler.obtainMessage(ListUpdate);
+        self.handler.sendMessage(msg);
+    }
+
+    public static void NotifyVersionUpdate(){
+        Message msg = self.handler.obtainMessage(VersionUpdate);
         self.handler.sendMessage(msg);
     }
 
