@@ -6,13 +6,15 @@ import android.graphics.Bitmap;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+
 import net.loveyu.contactofqqavatar.ContactAction;
 import net.loveyu.contactofqqavatar.R;
 
 public class AvatarClick implements View.OnClickListener {
     private Context context;
     private String id;
-    public AvatarClick(Context context,String id) {
+
+    public AvatarClick(Context context, String id) {
         this.context = context;
         this.id = id;
     }
@@ -24,9 +26,9 @@ public class AvatarClick implements View.OnClickListener {
         View dv = View.inflate(context, R.layout.dialog_avatar_display, null);
         Bitmap bm = ContactAction.getHighPhoto(id, context.getContentResolver());
         if (bm != null) {
-            ((ImageView)dv.findViewById(R.id.imageView)).setImageBitmap(bm);
+            ((ImageView) dv.findViewById(R.id.imageView)).setImageBitmap(bm);
         } else {
-            ((ImageView)dv.findViewById(R.id.imageView)).setImageResource(R.drawable.avatar);
+            ((ImageView) dv.findViewById(R.id.imageView)).setImageResource(R.drawable.avatar);
         }
         d.setContentView(dv);
         d.show();

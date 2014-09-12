@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.loveyu.contactofqqavatar"
- >
+    package="net.loveyu.contactofqqavatar">
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -12,17 +11,16 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-     
+        android:theme="@style/AppTheme">
+
         <activity
             android:name="net.loveyu.contactofqqavatar.MainActivity"
             android:label="@string/app_name"
-            android:launchMode="singleTask" >
-        </activity>
+            android:launchMode="singleTask"></activity>
         <activity
             android:name="net.loveyu.contactofqqavatar.LanuchActivity"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,16 +29,13 @@
         </activity>
         <activity
             android:name="net.loveyu.contactofqqavatar.ImportActivity"
-            android:label="@string/title_activity_import" >
-        </activity>
+            android:label="@string/title_activity_import"></activity>
         <activity
             android:name="net.loveyu.contactofqqavatar.AdActivity"
-            android:label="@string/title_activity_ad" >
-        </activity>
+            android:label="@string/title_activity_ad"></activity>
         <activity
             android:name="net.loveyu.contactofqqavatar.AboutActivity"
-            android:label="@string/title_activity_about" >
-        </activity>
+            android:label="@string/title_activity_about"></activity>
     </application>
 
 </manifest>

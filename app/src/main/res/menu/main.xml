@@ -1,34 +1,35 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/action_set_all"
         android:orderInCategory="10"
         android:showAsAction="never"
-        android:title="@string/set_all_avatar"/>
+        android:title="@string/set_all_avatar" />
     <item
         android:id="@+id/action_clear_all"
         android:orderInCategory="15"
         android:showAsAction="never"
-        android:title="@string/clear_all_avatar"/>
+        android:title="@string/clear_all_avatar" />
     <item
         android:id="@+id/action_refresh"
         android:orderInCategory="5"
-        android:title="@string/refresh_contact_list">
-    </item>
+        android:title="@string/refresh_contact_list"></item>
     <item
         android:id="@+id/action_import_list"
         android:orderInCategory="1"
-        android:title="@string/import_qq_list">
-    </item>
+        android:title="@string/import_qq_list"></item>
     <item
         android:id="@+id/action_exit"
         android:orderInCategory="100"
-        android:title="@string/exit">
-    </item>
+        android:title="@string/exit"></item>
     <item
         android:id="@+id/action_hide_ad"
-        android:title="@string/hide_ad" android:orderInCategory="200" android:visible="false">
-    </item>
-    <item android:id="@+id/action_about" android:title="@string/about_app" android:orderInCategory="80"></item>
+        android:title="@string/hide_ad"
+        android:orderInCategory="200"
+        android:visible="false"></item>
+    <item
+        android:id="@+id/action_about"
+        android:title="@string/about_app"
+        android:orderInCategory="80"></item>
 
 </menu>

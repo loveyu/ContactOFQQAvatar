@@ -7,7 +7,7 @@
     android:orientation="horizontal"
     android:paddingBottom="15dp"
     android:paddingTop="15dp"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity">
 
     <Button
         android:id="@+id/ButtonEditQQ"

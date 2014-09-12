@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:paddingBottom="2dp"
     android:paddingTop="2dp"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/ContactAvatar"

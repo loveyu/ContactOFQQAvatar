@@ -6,7 +6,7 @@
     android:paddingTop="8dp"
     android:paddingLeft="3dp"
     android:paddingRight="3dp"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/textView_now_email"
@@ -38,7 +38,7 @@
         android:layout_below="@+id/textView_now_email"
         android:ems="10"
         android:hint="@string/input_new_qq_number"
-        android:inputType="numberSigned" >
+        android:inputType="numberSigned">
 
         <requestFocus />
     </EditText>

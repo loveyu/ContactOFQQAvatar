@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:paddingBottom="15dp"
     android:paddingTop="2dp"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity">
 
     <EditText
         android:id="@+id/editTextQQNumber"
@@ -15,7 +15,7 @@
         android:layout_toLeftOf="@+id/buttonAddQQEmail"
         android:ems="10"
         android:hint="@string/input_qq_number"
-        android:inputType="numberSigned" >
+        android:inputType="numberSigned">
 
         <requestFocus />
     </EditText>
