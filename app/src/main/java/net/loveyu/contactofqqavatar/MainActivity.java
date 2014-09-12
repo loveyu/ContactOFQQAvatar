@@ -145,7 +145,6 @@ public class MainActivity extends Activity {
                                 ++v0;
                             }
                             if(v0==v1){
-                                Toast.makeText(self,self.getResources().getString(R.string.download_avatar_finish), Toast.LENGTH_SHORT).show();
                                 tvdp.setText("");
                             }else {
                                 tvdp.setText(v0+"/"+v1);
