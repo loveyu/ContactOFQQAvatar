@@ -39,6 +39,7 @@ public class MainActivity extends Activity {
     final static int ShowAdMsg = 5;
     final static int DownloadProcess = 6;
     final static int VersionUpdate = 7;
+    final static int OpenUri = 8;
     public Handler handler;
     public static boolean Refresh = false;
     private Button bsa;
@@ -73,7 +74,6 @@ public class MainActivity extends Activity {
         lv.setAdapter(ac);
         lv.setOnItemClickListener(new ListItemClick(this));
         lv.setOnItemLongClickListener(new ListItemLongClick(this));
-
         ((Button) findViewById(R.id.buttonSelectActionUpdateAvatar))
                 .setOnClickListener(new UpdateMoreAvatarClick(this));
         ((Button) findViewById(R.id.buttonSelectActionDeleteAvatar))
@@ -93,6 +93,12 @@ public class MainActivity extends Activity {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 switch (msg.what) {
+                    case OpenUri:
+                        Intent intent = new Intent();
+                        intent.setData(Uri.parse((String) msg.obj));
+                        intent.setAction(Intent.ACTION_VIEW);
+                        MainActivity.this.startActivity(intent);
+                        break;
                     case ListUpdate:
                         ac.notifyDataSetChanged();
                         break;
@@ -133,7 +139,7 @@ public class MainActivity extends Activity {
                         }
                         break;
                     case VersionUpdate:
-                        Toast.makeText(self, "Need Update", Toast.LENGTH_SHORT).show();
+                        ((Report) msg.obj).open_dialog(MainActivity.this);
                         break;
                     case DownloadProcess:
                         String[] value = tvdp.getText().toString().split("/");
@@ -183,8 +189,15 @@ public class MainActivity extends Activity {
         self.handler.sendMessage(msg);
     }
 
-    public static void NotifyVersionUpdate(){
+    public static void NotifyVersionUpdate(Report report) {
         Message msg = self.handler.obtainMessage(VersionUpdate);
+        msg.obj = report;
+        self.handler.sendMessage(msg);
+    }
+
+    public static void NotifyOpenUri(String uri) {
+        Message msg = self.handler.obtainMessage(OpenUri);
+        msg.obj = uri;
         self.handler.sendMessage(msg);
     }
 

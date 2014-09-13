@@ -2,7 +2,9 @@ package net.loveyu.contactofqqavatar.listener;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;

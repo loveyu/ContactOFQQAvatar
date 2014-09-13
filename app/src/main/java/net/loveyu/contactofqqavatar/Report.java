@@ -1,12 +1,25 @@
 package net.loveyu.contactofqqavatar;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.telephony.TelephonyManager;
+import android.text.Html;
+import android.text.method.ScrollingMovementMethod;
+import android.text.util.Linkify;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import net.loveyu.contactofqqavatar.listener.UpdateClick;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -27,21 +40,52 @@ import java.util.UUID;
 public class Report implements Runnable {
     private Context context;
     private int now_version = 0;
-    static String NewVersion = "";
-    static String DownloadUrl = "";
-    static ArrayList<String> Message = null;
+    private String NewVersion = "";
+    private String DownloadUrl = "";
+    private ArrayList<String> Message = null;
 
     public Report(Context context) {
         this.context = context;
     }
 
+    /**
+     * 打开更新提示框，必须通过UI主线程进行调用
+     */
+    public void open_dialog(Context context) {
+        if (!"".equals(NewVersion) && !"".equals(DownloadUrl)) {
+            String new_s = context.getResources().getString(R.string.found_version_update);
+            View dv = View.inflate(context, R.layout.dialog_update, null);
+            String html = "<p>" + new_s + " : <strong>" + NewVersion + "</strong></p>";
+            if (Message != null && Message.size() > 0) {
+                html += "<p>";
+                int i = 0;
+                for (String msg : Message) {
+                    html += ((i++ > 0 ? "<br>" : "") + msg);
+                }
+                html += "</p>";
+            }
+            TextView v = (TextView) dv.findViewById(R.id.textView);
+            v.setMovementMethod(ScrollingMovementMethod.getInstance());
+            v.setAutoLinkMask(Linkify.ALL);
+            v.setText(Html.fromHtml(html));
+            Dialog ad = new Dialog(context);
+            ad.setTitle(new_s);
+            ad.setContentView(dv);
+            dv.findViewById(R.id.button).setOnClickListener(new UpdateClick(ad, DownloadUrl));
+            ad.show();
+            NewVersion = "";
+            DownloadUrl = "";
+            Message = null;
+        }
+    }
+
     @Override
     public void run() {
-        String update_url = "http://www.loveyu.net/Update/ContactOfQqAvatar.php";
         try {
+            PackageInfo pi = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_ACTIVITIES);
+            String update_url = "http://www.loveyu.net/Update/ContactOfQqAvatar.php?version=" + pi.versionName;
             HttpPost httpRequest = new HttpPost(update_url);
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            PackageInfo pi = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_ACTIVITIES);
             params.add(new BasicNameValuePair("uid", getUid()));
             params.add(new BasicNameValuePair("version", pi.versionName));
             params.add(new BasicNameValuePair("version_code", "" + pi.versionCode));
@@ -61,6 +105,7 @@ public class Report implements Runnable {
             if (httpResponse.getStatusLine().getStatusCode() == 200) {
                 //取出回应字串
                 String strResult = EntityUtils.toString(httpResponse.getEntity());
+//                Log.d("Json", strResult);
                 parseJson(strResult);
             }
         } catch (Exception e) {
@@ -83,7 +128,7 @@ public class Report implements Runnable {
                 for (int i = 0; i < ja.length(); i++) {
                     Message.add(ja.getString(i));
                 }
-                MainActivity.NotifyVersionUpdate();
+                MainActivity.NotifyVersionUpdate(this);
             }
         } catch (JSONException e) {
             Log.e("JsonError", "Parse json error.");
