@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">联系人邮箱头像</string>
+    <string name="app_name">联系人邮箱C头像</string>
     <string name="action_settings">设置</string>
     <string name="empty">empty</string>
     <string name="clear_all_avatar">清除全部头像</string>
