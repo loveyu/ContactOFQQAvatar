@@ -6,19 +6,13 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.PermissionChecker;
 import android.util.Log;
-
-import static android.R.attr.targetSdkVersion;
 
 public class Permissions {
 
     public static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1000;
 
     private Activity context;
-
-    private int targetSdkVersion = Build.VERSION_CODES.M;
 
     private static Permissions instance = null;
 
@@ -31,12 +25,6 @@ public class Permissions {
 
     private Permissions(Activity context) {
         this.context = context;
-        try {
-            final PackageInfo info = context.getPackageManager().getPackageInfo(
-                    context.getPackageName(), 0);
-            targetSdkVersion = info.applicationInfo.targetSdkVersion;
-        } catch (PackageManager.NameNotFoundException e) {
-        }
     }
 
     public void check() {
@@ -45,31 +33,18 @@ public class Permissions {
 
 
     public boolean PermissionGranted() {
-        boolean result = true;
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
-            if (targetSdkVersion >= Build.VERSION_CODES.M) {
-                result = context.checkSelfPermission(Manifest.permission.READ_CONTACTS)
-                        == PackageManager.PERMISSION_GRANTED &&
-                        context.checkSelfPermission(Manifest.permission.WRITE_CONTACTS)
+        boolean result = context.checkSelfPermission(Manifest.permission.READ_CONTACTS)
+                == PackageManager.PERMISSION_GRANTED &&
+                context.checkSelfPermission(Manifest.permission.WRITE_CONTACTS)
                         == PackageManager.PERMISSION_GRANTED;
-                if (!result) {
-                    ActivityCompat.requestPermissions(context,
-                            new String[]{
-                                    Manifest.permission.READ_CONTACTS,
-                                    Manifest.permission.WRITE_CONTACTS
-                            },
-                            MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-                }
-            } else {
-                result = PermissionChecker.
-                        checkSelfPermission(context, Manifest.permission.READ_CONTACTS)
-                        == PermissionChecker.PERMISSION_GRANTED &&
-                        context.checkSelfPermission(Manifest.permission.WRITE_CONTACTS)
-                        == PackageManager.PERMISSION_GRANTED;
-            }
+        if (!result) {
+            context.requestPermissions(new String[]{
+                            Manifest.permission.READ_CONTACTS,
+                            Manifest.permission.WRITE_CONTACTS
+                    },
+                    MY_PERMISSIONS_REQUEST_READ_CONTACTS);
         }
+
 
         return result;
     }
