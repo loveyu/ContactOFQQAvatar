@@ -15,7 +15,10 @@ public class LaunchActivity extends Activity {
         setContentView(R.layout.activity_lanuch);
         intent = new Intent(this, MainActivity.class);
 
-        Permissions.getInstance(this).check();
+        if(Permissions.getInstance(this).check()){
+            finish();
+            return;
+        }
 
         new Thread(new Runnable() {
 

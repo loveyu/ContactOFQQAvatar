@@ -27,8 +27,8 @@ public class Permissions {
         this.context = context;
     }
 
-    public void check() {
-        PermissionGranted();
+    public boolean check() {
+        return PermissionGranted();
     }
 
 

@@ -100,7 +100,6 @@ public class MainActivity extends Activity {
                         ac.notifyDataSetChanged();
                         break;
                     case ListDataRefresh:
-                        Permissions.getInstance(MainActivity.this).check();
                         new Thread(new Runnable() {
                             public void run() {
 
