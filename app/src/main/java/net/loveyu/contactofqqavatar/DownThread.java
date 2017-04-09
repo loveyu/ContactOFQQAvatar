@@ -26,7 +26,7 @@ public class DownThread implements Runnable {
         try {
             byte[] bs = null;
             for (int size : new int[]{640, 140, 100, 40}) {
-                URL url = new URL("http://q1.qlogo.cn/g?b=qq&nk=" + qq + "&s=" + size + "&t="
+                URL url = new URL("http://q.qlogo.cn/headimg_dl?bs=qq&dst_uin=" + qq + "&spec=" + size + "&t="
                         + (System.currentTimeMillis() / 1000));
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setDoInput(true);
