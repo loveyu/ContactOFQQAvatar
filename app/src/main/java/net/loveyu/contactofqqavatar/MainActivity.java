@@ -64,9 +64,6 @@ public class MainActivity extends Activity {
         tvdp.setVisibility(TextView.GONE);
         rl = (RelativeLayout) findViewById(R.id.SelectContactAction);
         rl.setVisibility(RelativeLayout.GONE);
-        if (ShowAd) {
-            // 广告显示
-        }
 
         bsa.setOnClickListener(new SelectAllClick());
         bsx.setOnClickListener(new SelectReverseClick());
@@ -138,9 +135,6 @@ public class MainActivity extends Activity {
                             }
                         }
                         break;
-                    case VersionUpdate:
-                        ((Report) msg.obj).open_dialog(MainActivity.this);
-                        break;
                     case DownloadProcess:
                         String[] value = tvdp.getText().toString().split("/");
                         int offset = (Integer) msg.obj;
@@ -166,7 +160,6 @@ public class MainActivity extends Activity {
                 }
             }
         };
-        new Thread(new Report(getApplicationContext())).start();
     }
 
     /**
@@ -186,12 +179,6 @@ public class MainActivity extends Activity {
 
     public static void NotifyUpdate() {
         Message msg = self.handler.obtainMessage(ListUpdate);
-        self.handler.sendMessage(msg);
-    }
-
-    public static void NotifyVersionUpdate(Report report) {
-        Message msg = self.handler.obtainMessage(VersionUpdate);
-        msg.obj = report;
         self.handler.sendMessage(msg);
     }
 

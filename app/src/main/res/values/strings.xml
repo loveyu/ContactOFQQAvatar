@@ -68,7 +68,5 @@
     <string name="view_get_qq_list_help">Click ME:访问 http://www.loveyu.org/3151.html 查看获取QQ列表的方法</string>
     <string name="about_app">关于APP</string>
     <string name="title_activity_about">关于该APP</string>
-    <string name="found_version_update">发现新版本</string>
-    <string name="update_now">立即更新</string>
 
 </resources>
