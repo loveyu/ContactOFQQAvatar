@@ -14,6 +14,9 @@ public class LaunchActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lanuch);
         intent = new Intent(this, MainActivity.class);
+
+        Permissions.getInstance(this).check();
+
         new Thread(new Runnable() {
 
             @Override
@@ -28,6 +31,11 @@ public class LaunchActivity extends Activity {
             }
         }).start();
     }
+
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        Permissions.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
     private void goMain() {
         startActivity(intent);
         finish();

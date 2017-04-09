@@ -100,8 +100,10 @@ public class MainActivity extends Activity {
                         ac.notifyDataSetChanged();
                         break;
                     case ListDataRefresh:
+                        Permissions.getInstance(MainActivity.this).check();
                         new Thread(new Runnable() {
                             public void run() {
+
                                 Contact.selfList = ContactAction.getContact(getContentResolver());
                                 Contact.selectList = new ArrayList<Integer>();
                                 NotifyUpdate();
@@ -160,6 +162,10 @@ public class MainActivity extends Activity {
                 }
             }
         };
+    }
+
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        Permissions.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     /**

@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,58 +18,63 @@ import android.provider.ContactsContract;
 import android.util.Log;
 
 public class ContactAction {
+
     public static List<Contact> getContact(ContentResolver cr) {
         List<Contact> list = new ArrayList<Contact>();
-        Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null,
-                ContactsContract.Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC");
-        Cursor phones, emails;
-        if (cur.moveToFirst()) {
-            int idColumn = cur.getColumnIndex(ContactsContract.Contacts._ID);
-            int displayNameColumn = cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
-            do {
-                // 获得联系人的ID号
-                String contactId = cur.getString(idColumn);
-                // 获得联系人姓名
-                String disPlayName = cur.getString(displayNameColumn);
-                Contact concat = new Contact(contactId, disPlayName);
-                // 查看该联系人有多少个电话号码。如果没有这返回值为0
-                int phoneCount = cur.getInt(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
-                if (phoneCount > 0) {
-                    // 获得联系人的电话号码
-                    phones = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
-                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + contactId, null, null);
-                    if (phones.moveToFirst()) {
-                        do {
-                            // 遍历所有的电话号码
-                            String phoneNumber = phones.getString(phones
-                                    .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                            String phoneType = phones.getString(phones
-                                    .getColumnIndex(ContactsContract.CommonDataKinds.Phone.TYPE));
-                            concat.setPhone(phoneType, phoneNumber);
-                        } while (phones.moveToNext());
+        try {
+            Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null,
+                    ContactsContract.Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC");
+            Cursor phones, emails;
+            if (cur.moveToFirst()) {
+                int idColumn = cur.getColumnIndex(ContactsContract.Contacts._ID);
+                int displayNameColumn = cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
+                do {
+                    // 获得联系人的ID号
+                    String contactId = cur.getString(idColumn);
+                    // 获得联系人姓名
+                    String disPlayName = cur.getString(displayNameColumn);
+                    Contact concat = new Contact(contactId, disPlayName);
+                    // 查看该联系人有多少个电话号码。如果没有这返回值为0
+                    int phoneCount = cur.getInt(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
+                    if (phoneCount > 0) {
+                        // 获得联系人的电话号码
+                        phones = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
+                                ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + contactId, null, null);
+                        if (phones.moveToFirst()) {
+                            do {
+                                // 遍历所有的电话号码
+                                String phoneNumber = phones.getString(phones
+                                        .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                                String phoneType = phones.getString(phones
+                                        .getColumnIndex(ContactsContract.CommonDataKinds.Phone.TYPE));
+                                concat.setPhone(phoneType, phoneNumber);
+                            } while (phones.moveToNext());
+                        }
+                        phones.close();
                     }
-                    phones.close();
-                }
 
-                // 获取该联系人邮箱
-                emails = cr.query(ContactsContract.CommonDataKinds.Email.CONTENT_URI, null,
-                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + contactId, null, null);
-                if (emails.moveToFirst()) {
-                    do {
-                        // 遍历所有的邮箱
-                        String emailType = emails.getString(emails
-                                .getColumnIndex(ContactsContract.CommonDataKinds.Email.TYPE));
-                        String emailValue = emails.getString(emails
-                                .getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
-                        concat.setEmail(emailType, emailValue);
-                    } while (emails.moveToNext());
-                }
-                emails.close();
+                    // 获取该联系人邮箱
+                    emails = cr.query(ContactsContract.CommonDataKinds.Email.CONTENT_URI, null,
+                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + contactId, null, null);
+                    if (emails.moveToFirst()) {
+                        do {
+                            // 遍历所有的邮箱
+                            String emailType = emails.getString(emails
+                                    .getColumnIndex(ContactsContract.CommonDataKinds.Email.TYPE));
+                            String emailValue = emails.getString(emails
+                                    .getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
+                            concat.setEmail(emailType, emailValue);
+                        } while (emails.moveToNext());
+                    }
+                    emails.close();
 
-                list.add(concat);
-            } while (cur.moveToNext());
+                    list.add(concat);
+                } while (cur.moveToNext());
+            }
+            cur.close();
+        } catch (Exception ex) {
+            Log.e("Exception", ex.getMessage());
         }
-        cur.close();
         return list;
     }
 

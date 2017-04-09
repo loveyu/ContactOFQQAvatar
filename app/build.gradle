@@ -13,7 +13,7 @@ android {
     productFlavors {
     }
     dexOptions {
-        incremental false
+        incremental true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
@@ -24,4 +24,5 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
 }
