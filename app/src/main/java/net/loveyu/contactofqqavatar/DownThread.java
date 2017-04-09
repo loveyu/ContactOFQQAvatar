@@ -34,7 +34,7 @@ public class DownThread implements Runnable {
                 InputStream inputStream = conn.getInputStream();
                 bs = readStream(inputStream);
                 conn.disconnect();
-                if (bs.length == 3707 || (size == 100 && bs.length == 7097)) {
+                if (bs.length == 3707 || bs.length == 1512 || bs.length == 1996 || (size == 100 && bs.length == 7097)) {
                     if (size != 40) {
                         bs = null;
                     }
